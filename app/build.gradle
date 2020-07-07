@@ -7,6 +7,7 @@ import dependencies.TestDependencies
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: "../ktlint.gradle"
 
 android {
     compileSdkVersion Versions.compilesdk
@@ -27,6 +28,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    // Abort build on lint error
+    lintOptions {
+        abortOnError true
+        warningsAsErrors true
     }
 }
 

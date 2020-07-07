@@ -36,4 +36,5 @@ object Versions {
     val fragment_version = "1.2.0"
     val androidx_test_ext = "1.1.1"
     val crashlytics_gradle = "2.1.0"
+    val pintrest_ktlint = "0.37.2"
 }
