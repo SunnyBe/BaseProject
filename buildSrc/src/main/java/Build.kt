@@ -4,4 +4,5 @@ object Build {
     val google_services = "com.google.gms:google-services:${Versions.play_services}"
     val junit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.3.2.0"
     val crashlytics_gradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_gradle}"
+    val ktlint = "com.pinterest:ktlint:${Versions.pintrest_ktlint}"
 }

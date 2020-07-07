@@ -20,3 +20,12 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Lint before compiling project to run on mobile
+tasks.whenTaskAdded { task ->
+    if (task.name == 'compileDebugSources' ||
+            task.name == 'compileReleaseSources') {
+        task.dependsOn ktlint
+        task.mustRunAfter lint
+    }
+}
