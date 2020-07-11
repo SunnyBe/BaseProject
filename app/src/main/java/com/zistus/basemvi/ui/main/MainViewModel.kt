@@ -1,14 +1,22 @@
 package com.zistus.basemvi.ui.main
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.zistus.basemvi.domain.repository.MainRepository
 import com.zistus.basemvi.model.Number
 import com.zistus.basemvi.ui.main.state.MainStateEvent
 import com.zistus.basemvi.ui.main.state.MainViewState
+import com.zistus.core.utils.AbsentLiveData
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val mainRepository: MainRepository
+) : ViewModel() {
+
     private val _stateEvent: MutableLiveData<MainStateEvent> = MutableLiveData()
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
 
@@ -26,47 +34,23 @@ class MainViewModel : ViewModel() {
 
         when (stateEvent) {
             is MainStateEvent.GetRandomNumberInfo -> {
-                return object : LiveData<MainViewState>() {
-                    override fun onActive() {
-                        super.onActive()
-                        value = MainViewState(
-                            randomNumberInfo = Number()
-                        )
-                    }
-                }
+                return mainRepository.randomNumberDetails()
             }
 
             is MainStateEvent.GetDateNumberInfo -> {
-                return object : LiveData<MainViewState>() {
-                    override fun onActive() {
-                        super.onActive()
-                        value = MainViewState(
-                            dateNumberInfo = Number()
-                        )
-                    }
-                }
+                return mainRepository.dateNumberDetails()
             }
 
             is MainStateEvent.GetTriviaNumberInfo -> {
-                return object : LiveData<MainViewState>() {
-                    override fun onActive() {
-                        super.onActive()
-                        value = MainViewState(
-                            triviaNumberInfo = Number()
-                        )
-                    }
-                }
+                return mainRepository.triviaNumberDetails()
             }
 
             is MainStateEvent.GetYearNumberInfo -> {
-                return object : LiveData<MainViewState>() {
-                    override fun onActive() {
-                        super.onActive()
-                        value = MainViewState(
-                            yearNumberInfo = Number()
-                        )
-                    }
-                }
+                return mainRepository.yearNumberDetails()
+            }
+
+            is MainStateEvent.None -> {
+                return AbsentLiveData.create()
             }
         }
     }
@@ -86,4 +70,6 @@ class MainViewModel : ViewModel() {
     fun setStateEvent(event: MainStateEvent) {
         _stateEvent.value = event
     }
+
+    fun test() = "Test string"
 }

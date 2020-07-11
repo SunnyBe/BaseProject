@@ -19,4 +19,8 @@ sealed class MainStateEvent {
     class GetDateNumberInfo(
         val number: Long = Random.nextLong(100, 2020)
     ): MainStateEvent()
+
+    class None: MainStateEvent()
+
+
 }

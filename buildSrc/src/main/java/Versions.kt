@@ -38,4 +38,5 @@ object Versions {
     val crashlytics_gradle = "2.1.0"
     val pintrest_ktlint = "0.37.2"
     val hilt_version = "2.28-alpha"
+    val hilt_viewmodel = "1.0.0-alpha01"
 }

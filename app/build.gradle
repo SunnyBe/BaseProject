@@ -7,6 +7,8 @@ import dependencies.TestDependencies
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply from: "../ktlint.gradle"
 
 android {
@@ -35,12 +37,22 @@ android {
         abortOnError true
         warningsAsErrors true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation Dependencies.kotlin_standard_library
     implementation Dependencies.ktx
+    implementation Dependencies.fragment_ktx
+    implementation Dependencies.activity_ktx
 
     // Support
     implementation SupportDependencies.appcompat
@@ -53,7 +65,12 @@ dependencies {
     implementation Dependencies.kotlin_coroutines_play_services
 
     implementation Dependencies.dagger_hilt
+    implementation Dependencies.dagger_hilt_viewmodel
+    kapt AnnotationProcessing.hilt_compiler
+    kapt AnnotationProcessing.hilt_viewmodel_compiler
     implementation Dependencies.lifecycle_runtime
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_gson
 
     // Test
     testImplementation TestDependencies.junit4
