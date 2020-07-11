@@ -45,16 +45,21 @@ dependencies {
     // Support
     implementation SupportDependencies.appcompat
     implementation SupportDependencies.constraintlayout
+    implementation SupportDependencies.material_design
 
     implementation Dependencies.kotlin_coroutines
     implementation Dependencies.lifecycle_coroutines
     implementation Dependencies.kotlin_coroutines_android
     implementation Dependencies.kotlin_coroutines_play_services
 
+    implementation Dependencies.dagger_hilt
     implementation Dependencies.lifecycle_runtime
 
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
+
+    // Modules
+    implementation project(Modules.core)
 }

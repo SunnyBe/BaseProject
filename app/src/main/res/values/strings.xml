@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BaseMVI</string>
+    <string name="number_mock_label">90</string>
 </resources>
