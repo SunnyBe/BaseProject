@@ -4,23 +4,24 @@ import dependencies.Dependencies
 import dependencies.SupportDependencies
 import dependencies.TestDependencies
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "../ktlint.gradle"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion Versions.compilesdk
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId Application.id
         minSdkVersion Versions.minsdk
         targetSdkVersion Versions.targetsdk
         versionCode Application.version_code
         versionName Application.version_name
 
         testInstrumentationRunner AndroidTestDependencies.instrumentation_runner
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -28,12 +29,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    // Abort build on lint error
-    lintOptions {
-        abortOnError true
-        warningsAsErrors true
     }
 }
 
@@ -53,8 +48,12 @@ dependencies {
 
     implementation Dependencies.lifecycle_runtime
 
+    implementation Dependencies.dagger_hilt
+    kapt AnnotationProcessing.hilt_compiler
+
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
+
 }
