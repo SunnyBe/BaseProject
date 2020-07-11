@@ -46,15 +46,19 @@ dependencies {
     implementation SupportDependencies.appcompat
     implementation SupportDependencies.constraintlayout
 
-    implementation Dependencies.kotlin_coroutines
-    implementation Dependencies.lifecycle_coroutines
-    implementation Dependencies.kotlin_coroutines_android
-    implementation Dependencies.kotlin_coroutines_play_services
+    api Dependencies.kotlin_coroutines
+    api Dependencies.lifecycle_coroutines
+    api Dependencies.kotlin_coroutines_android
+    api Dependencies.kotlin_coroutines_play_services
 
-    implementation Dependencies.lifecycle_runtime
-
-    implementation Dependencies.dagger_hilt
+    api Dependencies.dagger_hilt
+    api Dependencies.dagger_hilt_viewmodel
     kapt AnnotationProcessing.hilt_compiler
+    kapt AnnotationProcessing.hilt_viewmodel_compiler
+    api Dependencies.lifecycle_runtime
+    api Dependencies.retrofit
+    api Dependencies.retrofit_gson
+    api Dependencies.logging_intercepter
 
     // Test
     testImplementation TestDependencies.junit4

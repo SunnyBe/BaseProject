@@ -3,7 +3,7 @@ package com.zistus.basemvi.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.ui.main.MainViewModel
-import com.zistus.core.di.module.ViewModelFactory
+import com.zistus.core.utils.ViewModelFactory
 import com.zistus.core.di.qualifier.ViewModelKey
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.zistus.core.di.module
+package com.zistus.core.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -11,6 +11,7 @@ import com.zistus.basemvi.model.Number
 import com.zistus.basemvi.ui.main.state.MainStateEvent
 import com.zistus.basemvi.ui.main.state.MainViewState
 import com.zistus.core.utils.AbsentLiveData
+import com.zistus.core.utils.DataState
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -23,13 +24,13 @@ class MainViewModel @Inject constructor(
     val viewState: LiveData<MainViewState>
         get() = _viewState
 
-    val dataState: LiveData<MainViewState> = Transformations.switchMap(_stateEvent) { stateEvent ->
+    val dataState: LiveData<DataState<MainViewState>> = Transformations.switchMap(_stateEvent) { stateEvent ->
         stateEvent?.let {
             handleStateEvent(it)
         }
     }
 
-    private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<MainViewState> {
+    private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<DataState<MainViewState>> {
         println("DEBUG: New StateEvent detected: $stateEvent")
 
         when (stateEvent) {
@@ -55,13 +56,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setRandomNumber(number: Number) {
+    fun setRandomNumber(number: Number?) {
         val mViewState = viewState.value ?: MainViewState()
         mViewState.randomNumberInfo = number
         _viewState.value = mViewState
     }
 
-    fun setYear(date: Number) {
+    fun setYear(date: Number?) {
         val mViewState = viewState.value ?: MainViewState()
         mViewState.randomNumberInfo = date
         _viewState.value = mViewState

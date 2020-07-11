@@ -1,5 +1,6 @@
 package com.zistus.basemvi.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.R
 import com.zistus.basemvi.ui.main.state.MainStateEvent
+import com.zistus.core.utils.DataStateListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.pane_dashboard_random.*
@@ -21,7 +23,9 @@ class MainFragment: Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val viewModel: MainViewModel by viewModels { viewModelFactory }
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+
+    lateinit var dataStateListener: DataStateListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,21 +44,25 @@ class MainFragment: Fragment() {
             viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
         }
 
-        randomNumberLabel.text = viewModel.test()
     }
 
     private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState->
             println("DEBUG: DataState: $dataState")
+            // Handle Loading and Message
+            dataStateListener.onDataStateChange(dataState)
 
-            // handle different data state that could return
-            dataState.randomNumberInfo?.let { number ->
-                // set the random number info returned
-                viewModel.setRandomNumber(number)
-            }
+            dataState.data?.let { event->
+                event.getContentIfNotHandled()?.let {
+                    it.randomNumberInfo.let { number ->
+                        // set the random number info returned
+                        viewModel.setRandomNumber(number)
+                    }
 
-            dataState.dateNumberInfo?.let {  date->
-                viewModel.setYear(date)
+                    it.dateNumberInfo?.let {  date->
+                        viewModel.setYear(date)
+                    }
+                }
             }
 
         })
@@ -66,7 +74,7 @@ class MainFragment: Fragment() {
                 // Todo Update the view
                 println("DEBUG: Setting random number info to view: ${viewState.randomNumberInfo}")
                 randomNumberLabel.text = viewState.randomNumberInfo?.number.toString()
-                randomNumberInfoLabel.text = viewState.randomNumberInfo?.content.toString()
+                randomNumberInfoLabel.text = viewState.randomNumberInfo?.text.toString()
             }
 
             viewState.dateNumberInfo?.let {
@@ -74,5 +82,15 @@ class MainFragment: Fragment() {
                 println("DEBUG: Setting date info ot view: ${viewState.dateNumberInfo}")
             }
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            dataStateListener = context as DataStateListener
+        }catch(e: ClassCastException){
+            println("$context must implement DataStateListener")
+        }
+
     }
 }
