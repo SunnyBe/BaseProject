@@ -29,42 +29,71 @@ class MainRepositoryImpl(val apiService: ApiService) : MainRepository {
         }.asLiveData()
     }
 
-    override fun dateNumberDetails(): LiveData<DataState<MainViewState>> {
-        return object : LiveData<DataState<MainViewState>>() {
-            override fun onActive() {
-                super.onActive()
-                value = DataState.data(
+    override fun dateNumberDetails(day: Long, month: Long): LiveData<DataState<MainViewState>> {
+        return object : NetworkBoundResource<Number, MainViewState>() {
+            override fun handleApiSuccessResponse(response: ApiSuccessResponse<Number>) {
+                result.value = DataState.data(
                     data = MainViewState(
-                        dateNumberInfo = Number()
+                        dateNumberInfo = response.body
                     )
                 )
             }
-        }
+
+            override fun createCall(): LiveData<GenericApiResponse<Number>> {
+                return apiService.dateInformation(12, 11)
+            }
+
+        }.asLiveData()
     }
 
-    override fun triviaNumberDetails(): LiveData<DataState<MainViewState>> {
-        return object : LiveData<DataState<MainViewState>>() {
-            override fun onActive() {
-                super.onActive()
-                value = DataState.data(
+    override fun triviaNumberDetails(number: Long?): LiveData<DataState<MainViewState>> {
+        return object : NetworkBoundResource<Number, MainViewState>() {
+            override fun handleApiSuccessResponse(response: ApiSuccessResponse<Number>) {
+                result.value = DataState.data(
                     data = MainViewState(
-                        triviaNumberInfo = Number()
+                        dateNumberInfo = response.body
                     )
                 )
             }
-        }
+
+            override fun createCall(): LiveData<GenericApiResponse<Number>> {
+                return apiService.randomNumber(number)
+            }
+
+        }.asLiveData()
     }
 
-    override fun yearNumberDetails(): LiveData<DataState<MainViewState>> {
-        return object : LiveData<DataState<MainViewState>>() {
-            override fun onActive() {
-                super.onActive()
-                value = DataState.data(
+    override fun yearNumberDetails(year: Long): LiveData<DataState<MainViewState>> {
+        return object : NetworkBoundResource<Number, MainViewState>() {
+            override fun handleApiSuccessResponse(response: ApiSuccessResponse<Number>) {
+                result.value = DataState.data(
                     data = MainViewState(
-                        yearNumberInfo = Number()
+                        dateNumberInfo = response.body
                     )
                 )
             }
-        }
+
+            override fun createCall(): LiveData<GenericApiResponse<Number>> {
+                return apiService.yearInformation(year)
+            }
+
+        }.asLiveData()
+    }
+
+    override fun mathFact(number: Long): LiveData<DataState<MainViewState>> {
+        return object : NetworkBoundResource<Number, MainViewState>() {
+            override fun handleApiSuccessResponse(response: ApiSuccessResponse<Number>) {
+                result.value = DataState.data(
+                    data = MainViewState(
+                        dateNumberInfo = response.body
+                    )
+                )
+            }
+
+            override fun createCall(): LiveData<GenericApiResponse<Number>> {
+                return apiService.yearInformation(number)
+            }
+
+        }.asLiveData()
     }
 }

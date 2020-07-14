@@ -37,13 +37,29 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         subscribeObservers()
-
-        randomDashboardPane?.setOnClickListener {
-            viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
+        viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
+/*
+        button?.setOnClickListener {
+            // Date
+            viewModel.setStateEvent(MainStateEvent.GetDateNumberInfo(textInputEditText?.text.toString().toLong()))
         }
 
+        button2?.setOnClickListener {
+            // year
+            viewModel.setStateEvent(MainStateEvent.GetYearNumberInfo(textInputEditText?.text.toString().toLong()))
+        }
+
+        button3?.setOnClickListener {
+            // Trivia
+            viewModel.setStateEvent(MainStateEvent.GetTriviaNumberInfo(textInputEditText?.text.toString().toLong()))
+        }
+
+        button4?.setOnClickListener {
+            // Random
+            viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
+        }
+ */
     }
 
     private fun subscribeObservers() {

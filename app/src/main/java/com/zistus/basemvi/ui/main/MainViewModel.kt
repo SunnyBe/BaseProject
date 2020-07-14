@@ -1,7 +1,5 @@
 package com.zistus.basemvi.ui.main
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -24,11 +22,12 @@ class MainViewModel @Inject constructor(
     val viewState: LiveData<MainViewState>
         get() = _viewState
 
-    val dataState: LiveData<DataState<MainViewState>> = Transformations.switchMap(_stateEvent) { stateEvent ->
-        stateEvent?.let {
-            handleStateEvent(it)
+    val dataState: LiveData<DataState<MainViewState>> =
+        Transformations.switchMap(_stateEvent) { stateEvent ->
+            stateEvent?.let {
+                handleStateEvent(it)
+            }
         }
-    }
 
     private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<DataState<MainViewState>> {
         println("DEBUG: New StateEvent detected: $stateEvent")
@@ -39,15 +38,15 @@ class MainViewModel @Inject constructor(
             }
 
             is MainStateEvent.GetDateNumberInfo -> {
-                return mainRepository.dateNumberDetails()
+                return mainRepository.dateNumberDetails(stateEvent.number, 11)
             }
 
             is MainStateEvent.GetTriviaNumberInfo -> {
-                return mainRepository.triviaNumberDetails()
+                return mainRepository.triviaNumberDetails(stateEvent.number)
             }
 
             is MainStateEvent.GetYearNumberInfo -> {
-                return mainRepository.yearNumberDetails()
+                return mainRepository.yearNumberDetails(stateEvent.number)
             }
 
             is MainStateEvent.None -> {
