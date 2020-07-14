@@ -7,18 +7,18 @@
     android:background="@drawable/fact_type_entry_bg">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/triviaIcon"
         android:layout_width="45dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="TODO"
-        android:src="@drawable/ic_icon_calendar_range"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        android:src="@drawable/ic_icon_inspiration"
+        app:layout_constraintBottom_toBottomOf="@+id/triviaEditEntry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toTopOf="@+id/triviaEditEntry" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/triviaEditEntry"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -31,17 +31,17 @@
         android:inputType="number"
         app:boxBackgroundMode="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/triviaIcon"
+        app:layout_constraintStart_toEndOf="@+id/triviaSendButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/triviaSendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/triviaEditEntry"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber"
+        app:layout_constraintTop_toTopOf="@+id/triviaEditEntry"
         app:srcCompat="@drawable/ic_icon_paper_plane" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BaseMVI</string>
     <string name="number_mock_label">90</string>
+    <string name="year_fact">Year Fact</string>
+    <string name="date_fact">Date Fact</string>
+    <string name="math_fact">Math Fact</string>
 </resources>

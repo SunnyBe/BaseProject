@@ -7,17 +7,17 @@
     android:background="@drawable/fact_type_entry_bg">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/yearIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_icon_year"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/yearEditEntry"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toTopOf="@+id/yearEditEntry" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/yearEditEntry"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -25,22 +25,22 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:hint="Year Fact"
+        android:hint="@string/year_fact"
         android:ems="10"
         android:inputType="number"
         app:boxBackgroundMode="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/yearSendButton"
+        app:layout_constraintStart_toEndOf="@+id/yearIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/yearSendButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/yearEditEntry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber"
+        app:layout_constraintTop_toTopOf="@+id/yearEditEntry"
         app:srcCompat="@drawable/ic_icon_paper_plane" />
 </androidx.constraintlayout.widget.ConstraintLayout>

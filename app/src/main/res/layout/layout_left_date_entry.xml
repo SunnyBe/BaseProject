@@ -7,18 +7,18 @@
     android:background="@drawable/fact_type_entry_bg">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/dateIcon"
         android:layout_width="45dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="TODO"
         android:src="@drawable/ic_icon_calendar_range"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/dateEditEntry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toTopOf="@+id/dateEditEntry" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/dateEditEntry"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -27,21 +27,21 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Date Fact"
+        android:hint="@string/date_fact"
         android:inputType="number"
         app:boxBackgroundMode="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/dateIcon"
+        app:layout_constraintStart_toEndOf="@+id/dateSendIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/dateSendIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/dateEditEntry"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumber"
+        app:layout_constraintTop_toTopOf="@+id/dateEditEntry"
         app:srcCompat="@drawable/ic_icon_paper_plane" />
 </androidx.constraintlayout.widget.ConstraintLayout>

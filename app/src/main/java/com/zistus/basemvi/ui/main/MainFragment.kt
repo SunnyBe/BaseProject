@@ -5,21 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.zistus.basemvi.R
+import com.zistus.basemvi.databinding.FragmentMainBinding
 import com.zistus.basemvi.ui.main.state.MainStateEvent
 import com.zistus.core.utils.DataStateListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.pane_dashboard_random.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment: Fragment() {
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -32,34 +32,33 @@ class MainFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
         viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
-/*
-        button?.setOnClickListener {
-            // Date
-            viewModel.setStateEvent(MainStateEvent.GetDateNumberInfo(textInputEditText?.text.toString().toLong()))
-        }
 
-        button2?.setOnClickListener {
-            // year
-            viewModel.setStateEvent(MainStateEvent.GetYearNumberInfo(textInputEditText?.text.toString().toLong()))
-        }
-
-        button3?.setOnClickListener {
-            // Trivia
-            viewModel.setStateEvent(MainStateEvent.GetTriviaNumberInfo(textInputEditText?.text.toString().toLong()))
-        }
-
-        button4?.setOnClickListener {
-            // Random
+        binding.randomDashboardPane.randomRefreshButton.setOnClickListener {
             viewModel.setStateEvent(MainStateEvent.GetRandomNumberInfo())
         }
- */
+
+        binding.includeDate.dateSendIcon.setOnClickListener {
+            // Date
+            viewModel.setStateEvent(MainStateEvent.GetDateNumberInfo(binding.includeDate.dateEditEntry.text.toString().toLong()))
+        }
+
+        binding.includeYear.yearSendButton.setOnClickListener {
+            // Year
+            viewModel.setStateEvent(MainStateEvent.GetYearNumberInfo(binding.includeYear.yearEditEntry.text.toString().toLong()))
+        }
+
+        binding.includeTrivia.triviaSendButton.setOnClickListener {
+            // Trivia
+            viewModel.setStateEvent(MainStateEvent.GetTriviaNumberInfo(binding.includeTrivia.triviaEditEntry.text.toString().toLong()))
+        }
     }
 
     private fun subscribeObservers() {
