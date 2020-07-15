@@ -12,6 +12,10 @@ sealed class MainStateEvent {
         val number: Long ? = Random.nextLong(0, 1000)
     ): MainStateEvent()
 
+    class GetMathFacts(
+        val number: Long ? = Random.nextLong(0, 1000)
+    ): MainStateEvent()
+
     class GetYearNumberInfo(
         val number: Long = Random.nextLong(0, 2020)
     ): MainStateEvent()

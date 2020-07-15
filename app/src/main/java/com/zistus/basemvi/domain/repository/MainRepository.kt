@@ -9,5 +9,5 @@ interface MainRepository {
     fun dateNumberDetails(day: Long, month: Long): LiveData<DataState<MainViewState>>
     fun triviaNumberDetails(number: Long?=0): LiveData<DataState<MainViewState>>
     fun yearNumberDetails(year: Long): LiveData<DataState<MainViewState>>
-    fun mathFact(number: Long): LiveData<DataState<MainViewState>>
+    fun mathFact(number: Long?): LiveData<DataState<MainViewState>>
 }

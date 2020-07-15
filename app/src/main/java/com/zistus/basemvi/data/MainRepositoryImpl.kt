@@ -40,7 +40,7 @@ class MainRepositoryImpl(val apiService: ApiService) : MainRepository {
             }
 
             override fun createCall(): LiveData<GenericApiResponse<Number>> {
-                return apiService.dateInformation(12, 11)
+                return apiService.dateFact(day, month)
             }
 
         }.asLiveData()
@@ -57,7 +57,7 @@ class MainRepositoryImpl(val apiService: ApiService) : MainRepository {
             }
 
             override fun createCall(): LiveData<GenericApiResponse<Number>> {
-                return apiService.randomNumber(number)
+                return apiService.trivialFacts(number?:0)
             }
 
         }.asLiveData()
@@ -74,13 +74,13 @@ class MainRepositoryImpl(val apiService: ApiService) : MainRepository {
             }
 
             override fun createCall(): LiveData<GenericApiResponse<Number>> {
-                return apiService.yearInformation(year)
+                return apiService.yearFact(year)
             }
 
         }.asLiveData()
     }
 
-    override fun mathFact(number: Long): LiveData<DataState<MainViewState>> {
+    override fun mathFact(number: Long?): LiveData<DataState<MainViewState>> {
         return object : NetworkBoundResource<Number, MainViewState>() {
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<Number>) {
                 result.value = DataState.data(
@@ -91,7 +91,7 @@ class MainRepositoryImpl(val apiService: ApiService) : MainRepository {
             }
 
             override fun createCall(): LiveData<GenericApiResponse<Number>> {
-                return apiService.yearInformation(number)
+                return apiService.mathFacts(number?:0)
             }
 
         }.asLiveData()

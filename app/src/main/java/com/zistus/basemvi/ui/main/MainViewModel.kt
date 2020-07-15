@@ -49,6 +49,10 @@ class MainViewModel @Inject constructor(
                 return mainRepository.yearNumberDetails(stateEvent.number)
             }
 
+            is MainStateEvent.GetMathFacts-> {
+                return mainRepository.mathFact(stateEvent.number)
+            }
+
             is MainStateEvent.None -> {
                 return AbsentLiveData.create()
             }

@@ -50,6 +50,10 @@ class MainFragment: Fragment() {
             viewModel.setStateEvent(MainStateEvent.GetDateNumberInfo(binding.includeDate.dateEditEntry.text.toString().toLong()))
         }
 
+        binding.includeMath.mathSendButton.setOnClickListener {
+            viewModel.setStateEvent(MainStateEvent.GetMathFacts(binding.includeMath.editTextNumber.text.toString().toLong()))
+        }
+
         binding.includeYear.yearSendButton.setOnClickListener {
             // Year
             viewModel.setStateEvent(MainStateEvent.GetYearNumberInfo(binding.includeYear.yearEditEntry.text.toString().toLong()))
@@ -88,8 +92,10 @@ class MainFragment: Fragment() {
             viewState.randomNumberInfo?.let {
                 // Todo Update the view
                 println("DEBUG: Setting random number info to view: ${viewState.randomNumberInfo}")
-                randomNumberLabel.text = viewState.randomNumberInfo?.number.toString()
-                randomNumberInfoLabel.text = viewState.randomNumberInfo?.text.toString()
+                binding.randomDashboardPane.randomNumberLabel.text = viewState.randomNumberInfo?.number.toString()
+                binding.randomDashboardPane.randomNumberInfoLabel.text = viewState.randomNumberInfo?.text.toString()
+                binding.randomDashboardPane.factType.text = viewState.randomNumberInfo?.type.toString()
+
             }
 
             viewState.dateNumberInfo?.let {
