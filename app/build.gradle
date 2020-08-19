@@ -8,6 +8,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: "../ktlint.gradle"
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Versions.compilesdk
@@ -35,6 +36,13 @@ android {
         abortOnError true
         warningsAsErrors true
     }
+
+    // Hilt uses Java 8 features
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dynamicFeatures = [':camera']
 }
 
 dependencies {
@@ -57,4 +65,6 @@ dependencies {
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
+
+    implementation project(":core")
 }

@@ -3,6 +3,7 @@ import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
 import dependencies.SupportDependencies
 import dependencies.TestDependencies
+import AnnotationProcessing
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -29,6 +30,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    // Hilt uses Java 8 features
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

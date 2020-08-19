@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BaseMVI</string>
+    <string name="title_camera">Scanner-Camera</string>
 </resources>
