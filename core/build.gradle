@@ -34,23 +34,31 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation Dependencies.kotlin_standard_library
-    implementation Dependencies.ktx
+    api Dependencies.kotlin_standard_library
+    api Dependencies.ktx
 
     // Support
-    implementation SupportDependencies.appcompat
-    implementation SupportDependencies.constraintlayout
+    api SupportDependencies.appcompat
+    api SupportDependencies.constraintlayout
 
-    implementation Dependencies.kotlin_coroutines
-    implementation Dependencies.lifecycle_coroutines
-    implementation Dependencies.kotlin_coroutines_android
-    implementation Dependencies.kotlin_coroutines_play_services
+    // Reactive programming
+    api Dependencies.kotlin_coroutines
+    api Dependencies.lifecycle_coroutines
+    api Dependencies.kotlin_coroutines_android
+    api Dependencies.kotlin_coroutines_play_services
 
-    implementation Dependencies.lifecycle_runtime
+    // Lifecycle
+    api Dependencies.lifecycle_runtime
 
-    implementation Dependencies.dagger_hilt
+    // DI
+    api Dependencies.dagger_hilt
+
+    // Google services
+    api Dependencies.play_core
+
+    // Processors
+    // kapt is non-transitive and must be declared on client module
     kapt AnnotationProcessing.hilt_compiler
-
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
