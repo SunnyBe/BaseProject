@@ -47,24 +47,19 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation Dependencies.kotlin_standard_library
-    implementation Dependencies.ktx
-
-    // Support
-    implementation SupportDependencies.appcompat
-    implementation SupportDependencies.constraintlayout
-
-    implementation Dependencies.kotlin_coroutines
-    implementation Dependencies.lifecycle_coroutines
-    implementation Dependencies.kotlin_coroutines_android
-    implementation Dependencies.kotlin_coroutines_play_services
 
     implementation Dependencies.lifecycle_runtime
+
+    kapt AnnotationProcessing.hilt_compiler
 
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
+
+    // Dagger-Hilt Testing
+    androidTestImplementation TestDependencies.dagger_hilt
+    kaptAndroidTest AnnotationProcessing.hilt_compiler
 
     implementation project(":core")
 }

@@ -6,7 +6,9 @@ import com.zistus.core.di.module.CameraModuleDependencies
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(dependencies = [CameraModuleDependencies::class])
+@Component(
+    dependencies = [CameraModuleDependencies::class]
+)
 interface CameraComponent {
 
     fun inject(activity: CameraActivity)
