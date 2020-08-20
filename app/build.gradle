@@ -9,6 +9,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: "../ktlint.gradle"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion Versions.compilesdk
@@ -50,6 +51,7 @@ dependencies {
 
     implementation Dependencies.lifecycle_runtime
 
+    implementation Dependencies.dagger_hilt
     kapt AnnotationProcessing.hilt_compiler
 
     // Test
