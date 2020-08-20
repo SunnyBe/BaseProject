@@ -3,11 +3,11 @@ import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
 import dependencies.SupportDependencies
 import dependencies.TestDependencies
+import AnnotationProcessing
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "../ktlint.gradle"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
@@ -16,13 +16,13 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId Application.id
         minSdkVersion Versions.minsdk
         targetSdkVersion Versions.targetsdk
         versionCode Application.version_code
         versionName Application.version_name
 
         testInstrumentationRunner AndroidTestDependencies.instrumentation_runner
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -32,36 +32,43 @@ android {
         }
     }
 
-    // Abort build on lint error
-    lintOptions {
-        abortOnError true
-        warningsAsErrors true
-    }
-
     // Hilt uses Java 8 features
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dynamicFeatures = [':camera']
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    api Dependencies.kotlin_standard_library
+    api Dependencies.ktx
 
-    implementation Dependencies.lifecycle_runtime
+    // Support
+    api SupportDependencies.appcompat
+    api SupportDependencies.constraintlayout
 
-    implementation Dependencies.dagger_hilt
+    // Reactive programming
+    api Dependencies.kotlin_coroutines
+    api Dependencies.lifecycle_coroutines
+    api Dependencies.kotlin_coroutines_android
+    api Dependencies.kotlin_coroutines_play_services
+
+    // Lifecycle
+    api Dependencies.lifecycle_runtime
+
+    // DI
+    api Dependencies.dagger_hilt
+
+    // Google services
+    api Dependencies.play_core
+
+    // Processors
+    // kapt is non-transitive and must be declared on client module
     kapt AnnotationProcessing.hilt_compiler
-
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
 
-    // Dagger-Hilt Testing
-    androidTestImplementation TestDependencies.dagger_hilt
-    kaptAndroidTest AnnotationProcessing.hilt_compiler
-
-    implementation project(":core")
 }

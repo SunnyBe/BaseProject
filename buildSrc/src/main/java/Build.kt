@@ -5,4 +5,5 @@ object Build {
     val junit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.3.2.0"
     val crashlytics_gradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_gradle}"
     val ktlint = "com.pinterest:ktlint:${Versions.pintrest_ktlint}"
+    val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
 }
