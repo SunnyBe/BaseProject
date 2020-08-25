@@ -63,6 +63,13 @@ dependencies {
     // Google services
     api Dependencies.play_core
 
+    // Network & DB
+    api Dependencies.room_ktx
+//    api Dependencies.room_coroutines
+    api Dependencies.retrofit
+    api Dependencies.retrofit_gson
+    api Dependencies.room_runtime
+
     // Processors
     // kapt is non-transitive and must be declared on client module
     kapt AnnotationProcessing.hilt_compiler

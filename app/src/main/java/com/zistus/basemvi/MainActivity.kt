@@ -11,7 +11,7 @@ import dagger.hilt.android.EntryPointAccessors
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     @Inject
     lateinit var testString: String
 
@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         testLabel?.text = testString
     }
 

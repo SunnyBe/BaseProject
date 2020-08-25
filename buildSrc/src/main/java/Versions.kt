@@ -8,7 +8,7 @@ object Versions {
     val dagger = "2.25.4"
     val nav_components = "2.3.0-alpha06"
     val material_dialogs = "3.2.1"
-    val room = "2.1.0"
+    val room = "2.2.5"
     val appcompat = "1.1.0"
     val constraintlayout = "1.1.3"
     val material_design = "1.1.0"

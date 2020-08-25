@@ -54,10 +54,13 @@ dependencies {
     implementation Dependencies.dagger_hilt
     kapt AnnotationProcessing.hilt_compiler
 
+    kapt AnnotationProcessing.room_compiler
+
     // Test
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junit_extension
     androidTestImplementation TestDependencies.espresso_core
+    testImplementation TestDependencies.room
 
     // Dagger-Hilt Testing
     androidTestImplementation TestDependencies.dagger_hilt
