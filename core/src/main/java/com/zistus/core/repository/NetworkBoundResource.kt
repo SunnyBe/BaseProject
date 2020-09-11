@@ -15,16 +15,15 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
     protected val result = MediatorLiveData<DataState<ViewStateType>>()
 
     init {
+        // For every call set initial value to loading
         result.value = DataState.loading(true)
 
         GlobalScope.launch(IO){
-            delay(500)
-
             withContext(Main){
                 val apiResponse = createCall()
+                // Listen for apiResponse once and remove the source from mediator liveData result
                 result.addSource(apiResponse) { response ->
                     result.removeSource(apiResponse)
-
                     handleNetworkCall(response)
                 }
             }

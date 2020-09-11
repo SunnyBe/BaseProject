@@ -17,7 +17,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import retrofit2.CallAdapter
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -35,6 +36,7 @@ object AppModule {
     fun provideApiService(apiService: ApiService): ApiService {
         return Retrofit.Builder()
             .baseUrl("https://randomapi.com/api/")
+            .client(provideClient())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
@@ -43,7 +45,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideAppDatabase(context: Context, appDatabase: AppDatabase): AppDatabase {
+    fun provideAppDatabase(context: Context): AppDatabase {
         return Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
             .fallbackToDestructiveMigration()
             .build()
@@ -69,7 +71,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideTestRepository(apiSource: TestNetworkSource, databaseSource: TestDatabaseSource): TestRepository {
+    fun provideTestRepository(
+        apiSource: TestNetworkSource,
+        databaseSource: TestDatabaseSource
+    ): TestRepository {
         return TestRepositoryImpl(apiSource, databaseSource)
     }
 
@@ -78,4 +83,14 @@ object AppModule {
     fun provideTestUseCase(testRepository: TestRepository): TestUseCase {
         return TestUseCase(testRepo = testRepository)
     }
+
+    fun provideClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(logging)
+        return httpClient.build()
+    }
+
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.zistus.basemvi.data.network.ApiService
 import com.zistus.basemvi.home.data.sources.network.entity.TestDto
 import com.zistus.basemvi.home.data.sources.network.entity.TestEntity
+import com.zistus.core.utils.DataState
 import com.zistus.core.utils.GenericApiResponse
 import javax.inject.Inject
 
@@ -13,10 +14,19 @@ class TestNetworkSourceImpl @Inject constructor(
 ): TestNetworkSource {
 
     override fun apiTestList(): LiveData<GenericApiResponse<List<TestDto>>> {
-        val data =  MutableLiveData<List<String>>().apply {
-            postValue(mutableListOf("Strength", "Money"))
-        }
         return apiService.apiTestList()
     }
+
+//    override suspend fun cApiTestList(): DataState<List<TestDto>> {
+//        val apiCall = apiService.cApiTestList()
+//        if (apiCall.isSuccessful) {
+//            return DataState.data(
+//                message = "Successfully fetched",
+//                data = apiCall.body()
+//            )
+//        } else {
+//            DataState.error<Throwable>(apiCall.errorBody())
+//        }
+//    }
 
 }

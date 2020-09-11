@@ -51,6 +51,8 @@ dependencies {
 
     implementation Dependencies.lifecycle_runtime
 
+    implementation Dependencies.logging_interceptor
+
     implementation Dependencies.dagger_hilt
     kapt AnnotationProcessing.hilt_compiler
 

@@ -39,7 +39,7 @@ class HomeFragment: Fragment() {
 
                     mainViewState.user?.let{
                         // set User data
-                        viewModel.setUser(it)
+//                        viewModel.setUser(it)
                     }
                 }
             }
