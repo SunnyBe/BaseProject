@@ -59,10 +59,10 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeStateEvent.GetUserEvent -> {
-                AbsentLiveData.create<DataState<HomeViewState>>()
+                AbsentLiveData.create()
             }
             else -> {
-                AbsentLiveData.create<DataState<HomeViewState>>()
+                AbsentLiveData.create()
             }
         }
     }
