@@ -56,9 +56,13 @@ dependencies {
 
     // Lifecycle
     api Dependencies.lifecycle_runtime
+    api Dependencies.lifecycle_runtime_ktx
+    api Dependencies.lifecycle_viewModel_savedstate
+    api Dependencies.fragment_ktx
 
     // DI
     api Dependencies.dagger_hilt
+    api Dependencies.dagger_hilt_viewmodel
 
     // Google services
     api Dependencies.play_core

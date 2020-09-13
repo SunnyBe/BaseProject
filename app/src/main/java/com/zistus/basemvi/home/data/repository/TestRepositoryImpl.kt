@@ -20,7 +20,6 @@ class TestRepositoryImpl @Inject constructor(
 
         return object : NetworkBoundResource<List<TestDto>, HomeViewState>() {
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<List<TestDto>>) {
-//                dbSource.saveTestFiles(response.body.map { it.toEntity() }.map { it.toData() })
                 result.value = DataState.data(
                     message = "Successful",
                     data = HomeViewState(

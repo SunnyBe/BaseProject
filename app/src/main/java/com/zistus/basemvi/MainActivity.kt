@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zistus.basemvi.di.AppComponent
 import com.zistus.basemvi.di.DaggerAppComponent
+import com.zistus.basemvi.home.ui.HomeFragment
 import com.zistus.core.di.module.AppModuleDependencies
 import com.zistus.core.utils.SplitHelper
 import dagger.hilt.android.EntryPointAccessors
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .inject(this)
         super.onCreate(savedInstanceState)
         testLabel?.text = testString
+        showMainFragment()
     }
 
     private fun daggerComponent(
@@ -36,5 +38,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     kClass
                 )
             )
+    }
+
+    private fun showMainFragment(){
+        if(supportFragmentManager.fragments.size == 0){
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fragment_home_container,
+                    HomeFragment(),
+                    "HomeFragment"
+                )
+                .commit()
+        }
     }
 }

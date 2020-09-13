@@ -1,14 +1,18 @@
 package com.zistus.basemvi.home.ui
 
 import android.content.Context
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.zistus.basemvi.R
 import com.zistus.basemvi.utils.DataStateListener
 
-class HomeFragment: Fragment() {
-    lateinit var viewModel: HomeViewModel
+class HomeFragment: Fragment(R.layout.fragment_home) {
+    val viewModel: HomeViewModel by viewModels<HomeViewModel>()
     lateinit var dataStateListener: DataStateListener
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -18,6 +22,11 @@ class HomeFragment: Fragment() {
             println("$context must implement DataStateListener")
         }
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        subscribeObservers()
     }
 
     private fun subscribeObservers(){

@@ -1,5 +1,6 @@
 package com.zistus.basemvi.home.ui
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -11,10 +12,9 @@ import com.zistus.core.utils.DataState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(
+class HomeViewModel @ViewModelInject constructor(
     private val testUseCase: TestUseCase
 ) : ViewModel() {
     private val _stateEvent: MutableLiveData<HomeStateEvent> = MutableLiveData()
@@ -68,7 +68,19 @@ class HomeViewModel @Inject constructor(
     }
 
     fun setFileList(files: List<TestEntity>) {
+        _viewState.value = HomeViewState(files)
+    }
 
+    fun getCurrentViewStateOrNew(): HomeViewState {
+        val value = viewState.value?.let {
+            it
+        } ?: HomeViewState()
+        return value
+    }
+
+    fun setStateEvent(event: HomeStateEvent) {
+        val state: HomeStateEvent = event
+        _stateEvent.value = state
     }
 
 }

@@ -3,7 +3,6 @@ package com.zistus.basemvi.data.network
 import androidx.lifecycle.LiveData
 import com.zistus.basemvi.home.data.sources.network.entity.TestDto
 import com.zistus.core.utils.GenericApiResponse
-import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
