@@ -14,12 +14,12 @@ data class TestEntity(
 ) {
     fun toData() = TestData(
         id = UUID.randomUUID().toString(),
-        first = this.first,
-        last = this.last,
-        email = this.email,
-        address = this.address,
-        created = this.created,
-        balance = this.balance
+        first = this.first?:"",
+        last = this.last?:"",
+        email = this.email?:"",
+        address = this.address?:"",
+        created = this.created?:"",
+        balance = this.balance?:""
     )
 
     fun toDto() = TestDto(

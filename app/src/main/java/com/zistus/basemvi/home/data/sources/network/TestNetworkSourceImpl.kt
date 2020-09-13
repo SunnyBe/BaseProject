@@ -17,15 +17,15 @@ class TestNetworkSourceImpl @Inject constructor(
         return apiService.apiTestList()
     }
 
-//    override suspend fun cApiTestList(): DataState<List<TestDto>> {
+//    override suspend fun cApiTestList(): com.zistus.core.utils.DataState<List<TestDto>> {
 //        val apiCall = apiService.cApiTestList()
 //        if (apiCall.isSuccessful) {
-//            return DataState.data(
+//            return com.zistus.core.utils.DataState.data(
 //                message = "Successfully fetched",
 //                data = apiCall.body()
 //            )
 //        } else {
-//            DataState.error<Throwable>(apiCall.errorBody())
+//            com.zistus.core.utils.DataState.error<Throwable>(apiCall.errorBody())
 //        }
 //    }
 

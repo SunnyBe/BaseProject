@@ -30,7 +30,7 @@ class HomeFragment: Fragment() {
             dataState.data?.let{ event ->
                 event.getContentIfNotHandled()?.let{ mainViewState ->
 
-                    println("DEBUG: DataState: ${mainViewState}")
+                    println("DEBUG: com.zistus.core.utils.DataState: ${mainViewState}")
 
                     mainViewState.fileList?.let{
                         // set BlogPosts data

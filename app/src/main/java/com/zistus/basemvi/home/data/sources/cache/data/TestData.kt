@@ -11,24 +11,24 @@ import com.zistus.basemvi.utils.Labels
 data class TestData(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String?,
+    val id: String,
 
     @ColumnInfo(name = "first")
-    val first: String?,
+    val first: String,
 
     @ColumnInfo(name = "last")
-    val last: String?,
+    val last: String,
 
     @ColumnInfo(name = "email")
-    val email: String?,
+    val email: String,
 
     @ColumnInfo(name = "address")
-    val address: String?,
+    val address: String,
 
     @ColumnInfo(name = "created")
-    val created: String?,
+    val created: String,
 
     @ColumnInfo(name = "balance")
-    val balance: String?
+    val balance: String
 
 )

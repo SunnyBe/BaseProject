@@ -9,5 +9,5 @@ interface TestNetworkSource {
 
     fun apiTestList(): LiveData<GenericApiResponse<List<TestDto>>>
 
-//    suspend fun cApiTestList(): DataState<List<TestDto>>
+//    suspend fun cApiTestList(): com.zistus.core.utils.DataState<List<TestDto>>
 }

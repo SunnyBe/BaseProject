@@ -2,6 +2,7 @@ package com.zistus.core.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.zistus.core.utils.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+const val TESTING_NETWORK_DELAY = 2000L
 abstract class DatabaseBoundResource<ResponseObject, ViewStateType> {
 
     protected val result = MediatorLiveData<DataState<ViewStateType>>()
