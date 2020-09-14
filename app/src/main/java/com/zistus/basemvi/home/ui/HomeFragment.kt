@@ -9,16 +9,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.R
 import com.zistus.basemvi.utils.DataStateListener
+import com.zistus.core.di.ViewModelFactory
+import javax.inject.Inject
 
-class HomeFragment: Fragment(R.layout.fragment_home) {
-    val viewModel: HomeViewModel by viewModels<HomeViewModel>()
+class HomeFragment : Fragment(R.layout.fragment_home) {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+//    private val viewModel: HomeViewModel by viewModels<HomeViewModel>()
+    lateinit var viewModel: HomeViewModel
     lateinit var dataStateListener: DataStateListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try{
+        try {
             dataStateListener = context as DataStateListener
-        }catch(e: ClassCastException){
+        } catch (e: ClassCastException) {
             println("$context must implement DataStateListener")
         }
 
@@ -26,27 +33,28 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        viewModel = ViewModelProvider()
         subscribeObservers()
     }
 
-    private fun subscribeObservers(){
+    private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
 
             // Handle Loading and Message
             dataStateListener.onDataStateChange(dataState)
 
             // handle Data<T>
-            dataState.data?.let{ event ->
-                event.getContentIfNotHandled()?.let{ mainViewState ->
+            dataState.data?.let { event ->
+                event.getContentIfNotHandled()?.let { mainViewState ->
 
                     println("DEBUG: com.zistus.core.utils.DataState: ${mainViewState}")
 
-                    mainViewState.fileList?.let{
+                    mainViewState.fileList?.let {
                         // set BlogPosts data
                         viewModel.setFileList(it)
                     }
 
-                    mainViewState.user?.let{
+                    mainViewState.user?.let {
                         // set User data
 //                        viewModel.setUser(it)
                     }
@@ -54,13 +62,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             }
         })
 
-        viewModel.viewState.observe(viewLifecycleOwner, Observer {viewState ->
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.user?.let {
                 // set BlogPosts to RecyclerView
                 println("DEBUG: Setting blog posts to RecyclerView: ${viewState.fileList}")
             }
 
-            viewState.user?.let{
+            viewState.user?.let {
                 // set User data to widgets
                 println("DEBUG: Setting User data: ${viewState.user}")
             }

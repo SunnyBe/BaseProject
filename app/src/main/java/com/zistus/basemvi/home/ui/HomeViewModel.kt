@@ -1,6 +1,5 @@
 package com.zistus.basemvi.home.ui
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -14,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Inject
 
-class HomeViewModel @ViewModelInject constructor(
+class HomeViewModel @Inject constructor(
     private val testUseCase: TestUseCase
 ) : ViewModel() {
     private val _stateEvent: MutableLiveData<HomeStateEvent> = MutableLiveData()
