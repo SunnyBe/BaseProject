@@ -1,8 +1,5 @@
 package com.zistus.basemvi.di
 
-import androidx.fragment.app.Fragment
-import com.zistus.basemvi.home.ui.HomeFragment
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

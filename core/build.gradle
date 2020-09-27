@@ -1,9 +1,9 @@
+import AnnotationProcessing
 import Application
 import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
 import dependencies.SupportDependencies
 import dependencies.TestDependencies
-import AnnotationProcessing
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'

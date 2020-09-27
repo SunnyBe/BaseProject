@@ -10,7 +10,6 @@ import com.zistus.basemvi.di.DaggerAppComponent
 import com.zistus.basemvi.utils.DataStateListener
 import com.zistus.core.di.module.AppModuleDependencies
 import com.zistus.core.utils.DataState
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 
 //@AndroidEntryPoint
