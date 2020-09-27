@@ -2,6 +2,8 @@ package com.zistus.basemvi.di
 
 import android.content.Context
 import com.zistus.basemvi.MainActivity
+import com.zistus.basemvi.home.ui.HomeActivity
+import com.zistus.basemvi.home.ui.HomeFragment
 import com.zistus.core.di.module.AppModuleDependencies
 import dagger.BindsInstance
 import dagger.Component
@@ -14,6 +16,8 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(activity: MainActivity)
+    fun inject(activity: HomeActivity)
+    fun inject(homeFragment: HomeFragment)
 
     @Component.Builder
     interface Builder {

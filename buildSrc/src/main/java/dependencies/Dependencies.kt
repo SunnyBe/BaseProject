@@ -14,6 +14,8 @@ object Dependencies {
     val kotlin_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}"
     val kotlin_coroutines_play_services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_play_services}"
     val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    val dagger_android = "com.google.dagger:dagger-android:${Versions.dagger}"
+    val dagger_android_support = "com.google.dagger:dagger-android-support:${Versions.dagger}"
     val dagger_hilt = "com.google.dagger:hilt-android:${Versions.hilt_version}"
     val dagger_hilt_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
     val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav_components}"

@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:fullBackupContent="true"
         android:theme="@style/AppTheme"
-        android:name="com.zistus.core.CoreApplication">
-        <activity android:name=".MainActivity">
+        android:name=".AppApplication">
+        <activity android:name=".home.ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

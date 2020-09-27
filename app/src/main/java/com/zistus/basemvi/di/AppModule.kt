@@ -24,12 +24,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
-@Module
+@Module(includes = [HomeActivityModule::class])
 object AppModule {
 
-    @Singleton
-    @Provides
-    fun provideTestString(): String = "This is a test injection"
+//    @Singleton
+//    @Provides
+//    fun provideTestString(): String = "This is a test injection"
 
     @Singleton
     @Provides

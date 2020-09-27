@@ -1,7 +1,6 @@
 import Application
 import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
-import dependencies.SupportDependencies
 import dependencies.TestDependencies
 
 apply plugin: 'com.android.application'
@@ -58,7 +57,10 @@ dependencies {
     implementation Dependencies.logging_interceptor
 
     implementation Dependencies.dagger_hilt
+    implementation Dependencies.dagger_android
+    implementation Dependencies.dagger_android_support
     kapt AnnotationProcessing.hilt_compiler
+    kapt AnnotationProcessing.dagger_android_compiler
 
     kapt AnnotationProcessing.room_compiler
 

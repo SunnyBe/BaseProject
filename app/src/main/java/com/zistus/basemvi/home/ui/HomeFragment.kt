@@ -3,22 +3,26 @@ package com.zistus.basemvi.home.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.R
+import com.zistus.basemvi.di.AppComponent
+import com.zistus.basemvi.di.DaggerAppComponent
 import com.zistus.basemvi.utils.DataStateListener
-import com.zistus.core.di.ViewModelFactory
+import com.zistus.core.di.module.AppModuleDependencies
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
+//@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var testText: String
 
-//    private val viewModel: HomeViewModel by viewModels<HomeViewModel>()
-    lateinit var viewModel: HomeViewModel
+    //    @Inject
+//    lateinit var viewModelFactory: ViewModelFactory
+//
+//    private val viewModel: HomeViewModel by viewModels<HomeViewModel>{viewModelFactory}
     lateinit var dataStateListener: DataStateListener
 
     override fun onAttach(context: Context) {
@@ -31,47 +35,68 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        daggerComponent(AppModuleDependencies::class.java)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+        Toast.makeText(context, testText, Toast.LENGTH_LONG).show()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        viewModel = ViewModelProvider()
-        subscribeObservers()
+//        subscribeObservers()
     }
 
-    private fun subscribeObservers() {
-        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+//    private fun subscribeObservers() {
+//        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+//
+//            // Handle Loading and Message
+//            dataStateListener.onDataStateChange(dataState)
+//
+//            // handle Data<T>
+//            dataState.data?.let { event ->
+//                event.getContentIfNotHandled()?.let { mainViewState ->
+//
+//                    println("DEBUG: com.zistus.core.utils.DataState: ${mainViewState}")
+//
+//                    mainViewState.fileList?.let {
+//                        // set BlogPosts data
+//                        viewModel.setFileList(it)
+//                    }
+//
+//                    mainViewState.user?.let {
+//                        // set User data
+////                        viewModel.setUser(it)
+//                    }
+//                }
+//            }
+//        })
+//
+//        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+//            viewState.user?.let {
+//                // set BlogPosts to RecyclerView
+//                println("DEBUG: Setting blog posts to RecyclerView: ${viewState.fileList}")
+//            }
+//
+//            viewState.user?.let {
+//                // set User data to widgets
+//                println("DEBUG: Setting User data: ${viewState.user}")
+//            }
+//        })
+//    }
 
-            // Handle Loading and Message
-            dataStateListener.onDataStateChange(dataState)
-
-            // handle Data<T>
-            dataState.data?.let { event ->
-                event.getContentIfNotHandled()?.let { mainViewState ->
-
-                    println("DEBUG: com.zistus.core.utils.DataState: ${mainViewState}")
-
-                    mainViewState.fileList?.let {
-                        // set BlogPosts data
-                        viewModel.setFileList(it)
-                    }
-
-                    mainViewState.user?.let {
-                        // set User data
-//                        viewModel.setUser(it)
-                    }
-                }
-            }
-        })
-
-        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-            viewState.user?.let {
-                // set BlogPosts to RecyclerView
-                println("DEBUG: Setting blog posts to RecyclerView: ${viewState.fileList}")
-            }
-
-            viewState.user?.let {
-                // set User data to widgets
-                println("DEBUG: Setting User data: ${viewState.user}")
-            }
-        })
+    private fun daggerComponent(
+        kClass: Class<AppModuleDependencies>
+    ): AppComponent.Builder {
+        return DaggerAppComponent.builder()
+            .context(requireContext())
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    requireContext(),
+                    kClass
+                )
+            )
     }
 }
