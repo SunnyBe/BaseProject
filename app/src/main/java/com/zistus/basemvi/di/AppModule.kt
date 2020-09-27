@@ -33,7 +33,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApiService(apiService: ApiService): ApiService {
+    fun provideApiService(): ApiService {
         return Retrofit.Builder()
             .baseUrl("https://randomapi.com/api/")
             .client(provideClient())
@@ -53,8 +53,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideTestDao(appDatabase: AppDatabase): TestDatabaseSource {
-        return TestDatabaseSourceImpl(appDatabase.testDao())
+    fun provideTestDao(appDatabase: AppDatabase): TestDao {
+        return appDatabase.testDao()
     }
 
     @Singleton
