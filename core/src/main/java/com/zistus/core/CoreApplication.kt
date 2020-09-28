@@ -5,7 +5,7 @@ import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
 import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
+//@HiltAndroidApp
 open class CoreApplication: Application() {
 
     override fun attachBaseContext(base: Context?) {

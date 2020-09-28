@@ -75,4 +75,5 @@ dependencies {
     kaptAndroidTest AnnotationProcessing.hilt_compiler
 
     implementation project(":core")
+    implementation project(":camera")
 }

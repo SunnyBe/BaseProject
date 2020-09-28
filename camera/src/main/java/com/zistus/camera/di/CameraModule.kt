@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Module
 object CameraModule {
 
-    @Singleton
     @Provides
     fun provideTestString(): String = "This is a test injection"
 }

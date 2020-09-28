@@ -7,7 +7,8 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(
-    dependencies = [CameraModuleDependencies::class]
+    dependencies = [CameraModuleDependencies::class],
+    modules = [CameraModule::class]
 )
 interface CameraComponent {
 
