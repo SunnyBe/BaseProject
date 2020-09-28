@@ -1,9 +1,9 @@
+import AnnotationProcessing
 import Application
 import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
 import dependencies.SupportDependencies
 import dependencies.TestDependencies
-import AnnotationProcessing
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -56,12 +56,23 @@ dependencies {
 
     // Lifecycle
     api Dependencies.lifecycle_runtime
+    api Dependencies.lifecycle_runtime_ktx
+    api Dependencies.lifecycle_viewModel_savedstate
+    api Dependencies.fragment_ktx
 
     // DI
     api Dependencies.dagger_hilt
+    api Dependencies.dagger_hilt_viewmodel
 
     // Google services
     api Dependencies.play_core
+
+    // Network & DB
+    api Dependencies.room_ktx
+//    api Dependencies.room_coroutines
+    api Dependencies.retrofit
+    api Dependencies.retrofit_gson
+    api Dependencies.room_runtime
 
     // Processors
     // kapt is non-transitive and must be declared on client module

@@ -1,0 +1,38 @@
+import dependencies.AndroidTestDependencies
+import dependencies.TestDependencies
+import Application
+import AnnotationProcessing
+
+apply plugin: "com.android.dynamic-feature"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compilesdk
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion Versions.minsdk
+        targetSdkVersion Versions.targetsdk
+        versionCode Application.version_code
+        versionName Application.version_name
+
+        testInstrumentationRunner AndroidTestDependencies.instrumentation_runner
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(":app")
+    implementation project(":core")
+    // Processors
+    // kapt is non-transitive and must be declared on client module
+    kapt AnnotationProcessing.hilt_compiler
+    // Test
+    testImplementation TestDependencies.junit4
+    androidTestImplementation TestDependencies.junit_extension
+    androidTestImplementation TestDependencies.espresso_core
+}

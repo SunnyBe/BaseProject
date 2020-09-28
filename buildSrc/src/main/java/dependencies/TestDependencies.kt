@@ -12,4 +12,5 @@ object TestDependencies {
     val junit_extension = "androidx.test.ext:junit:${Versions.junit_ext_version}"
     val mockk = "io.mockk:mockk:${Versions.mockk_version}"
     val dagger_hilt = "com.google.dagger:hilt-android-testing:2.28-alpha"
+    val room = "androidx.room:room-testing:${Versions.room}"
 }
