@@ -11,6 +11,7 @@ import com.zistus.core.utils.DataState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -50,6 +51,10 @@ class HomeViewModel @Inject constructor(
                 processStateEvent(stateEvent)
             }
         }
+
+    val dataStateFlow = flow<DataState<HomeViewState>> {
+        _stateEvent.value
+    }
 
     private fun processStateEvent(stateEvent: HomeStateEvent?): LiveData<DataState<HomeViewState>>? {
         return when (stateEvent) {

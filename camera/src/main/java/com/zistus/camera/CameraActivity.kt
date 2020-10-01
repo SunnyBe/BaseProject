@@ -3,6 +3,7 @@ package com.zistus.camera
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.zistus.basemvi.home.ui.HomeFragment
 import com.zistus.camera.di.DaggerCameraComponent
 import com.zistus.core.di.module.CameraModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
