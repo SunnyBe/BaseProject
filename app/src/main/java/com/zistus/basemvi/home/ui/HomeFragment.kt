@@ -46,7 +46,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         subscribeObservers()
         textView2.text = testText
         textView2?.setOnClickListener {
-            activity?.startActivity(Intent(activity, CameraActivity::class))
+//            activity?.startActivity(Intent(activity, CameraActivity::class))
+
         }
     }
 
