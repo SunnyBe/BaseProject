@@ -79,6 +79,9 @@ dependencies {
     api Dependencies.retrofit_gson
     api Dependencies.room_runtime
 
+    // Navigation
+    api Dependencies.navigation_dynamic
+
     // Processors
     // kapt is non-transitive and must be declared on client module
     kapt AnnotationProcessing.hilt_compiler

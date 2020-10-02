@@ -5,9 +5,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import com.zistus.basemvi.R
 import com.zistus.basemvi.databinding.ActivityNoteBinding
-import com.zistus.basemvi.note.ui.note_list.NoteListFragment
 import com.zistus.core.di.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,7 +27,10 @@ class NoteActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        showNoteFragment()
+        val navHostFragment: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.note_host_container) as NavHostFragment? ?: return
+        val navController = navHostFragment.navController
+
         viewModel.isLoading.observe(this, Observer {
             showProgress(it)
         })
@@ -38,15 +41,6 @@ class NoteActivity : AppCompatActivity() {
             binding.noteProgress.visibility = View.VISIBLE
         } else {
             binding.noteProgress.visibility = View.GONE
-        }
-    }
-
-    //Todo Remove when nav arch is in place
-    private fun showNoteFragment() {
-        if (supportFragmentManager.fragments.size == 0) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.note_container, NoteListFragment(), "NoteFragment")
-                .commit()
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.zistus.basemvi.R
 import com.zistus.basemvi.databinding.FragmentHomeBinding
 import com.zistus.basemvi.note.ui.NoteActivityViewModel
@@ -28,6 +29,7 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
     @ExperimentalCoroutinesApi
     private val viewModel: NoteListViewModel by viewModels { viewModelFactory }
 
