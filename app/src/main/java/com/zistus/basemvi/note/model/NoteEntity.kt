@@ -4,6 +4,6 @@ sealed class NoteEntity {
     data class Note(
         val id: String,
         val title: String,
-        val content: String
+        val content: String?=""
     ): NoteEntity()
 }

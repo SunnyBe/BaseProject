@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.home.ui.HomeViewModel
 import com.zistus.basemvi.note.ui.NoteActivityViewModel
+import com.zistus.basemvi.note.ui.note_list.NoteListViewModel
 import com.zistus.core.di.ViewModelFactory
 import com.zistus.core.di.scopes.ViewModelKey
 import dagger.Binds
@@ -27,4 +28,9 @@ abstract class FactoryModule {
     @IntoMap
     @ViewModelKey(NoteActivityViewModel::class)
     abstract fun bindNoteActivityViewModel(viewModel: NoteActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NoteListViewModel::class)
+    abstract fun bindNoteListViewModel(viewModel: NoteListViewModel): ViewModel
 }

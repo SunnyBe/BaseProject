@@ -9,15 +9,15 @@ sealed class NoteStateEvent {
     class FetchAllNote() : NoteStateEvent()
 
     class GetNote(
-        noteId: String
+        val noteId: String
     ) : NoteStateEvent()
 
     class SaveNote(
-        note: NoteEntity.Note?
+        val note: NoteEntity.Note?
     ) : NoteStateEvent()
 
     class UpdateNote(
-        note: NoteEntity.Note? = null,
-        noteId: String? = null
+        val note: NoteEntity.Note? = null,
+        val noteId: String? = null
     ) : NoteStateEvent()
 }
