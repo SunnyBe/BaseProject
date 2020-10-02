@@ -3,6 +3,7 @@ package com.zistus.basemvi.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zistus.basemvi.home.ui.HomeViewModel
+import com.zistus.basemvi.note.ui.NoteActivityViewModel
 import com.zistus.core.di.ViewModelFactory
 import com.zistus.core.di.scopes.ViewModelKey
 import dagger.Binds
@@ -21,4 +22,9 @@ abstract class FactoryModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NoteActivityViewModel::class)
+    abstract fun bindNoteActivityViewModel(viewModel: NoteActivityViewModel): ViewModel
 }

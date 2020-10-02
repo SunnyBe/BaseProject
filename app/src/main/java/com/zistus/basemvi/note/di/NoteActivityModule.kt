@@ -1,4 +1,4 @@
-package com.zistus.basemvi.di
+package com.zistus.basemvi.note.di
 
 import dagger.Module
 import dagger.Provides
@@ -7,7 +7,6 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-object HomeActivityModule {
-    @Provides
-    fun provideTestString() = "This is a test string"
+object NoteActivityModule {
+
 }
