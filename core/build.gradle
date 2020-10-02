@@ -50,7 +50,9 @@ dependencies {
 
     // Reactive programming
     api Dependencies.kotlin_coroutines
+    api Dependencies.kotlin_coroutines_common
     api Dependencies.lifecycle_coroutines
+    api Dependencies.lifecycle_livedata
     api Dependencies.kotlin_coroutines_android
     api Dependencies.kotlin_coroutines_play_services
 

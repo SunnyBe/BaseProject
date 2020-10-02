@@ -4,14 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.zistus.basemvi.data.cache.room.AppDatabase
 import com.zistus.basemvi.data.network.ApiService
-import com.zistus.basemvi.home.data.repository.TestRepositoryImpl
-import com.zistus.basemvi.home.data.sources.cache.TestDatabaseSource
-import com.zistus.basemvi.home.data.sources.cache.TestDatabaseSourceImpl
-import com.zistus.basemvi.home.data.sources.cache.data.TestDao
-import com.zistus.basemvi.home.data.sources.network.TestNetworkSource
-import com.zistus.basemvi.home.data.sources.network.TestNetworkSourceImpl
-import com.zistus.basemvi.home.domain.TestRepository
-import com.zistus.basemvi.home.domain.TestUseCase
+import com.zistus.basemvi.home.di.HomeActivityModule
+import com.zistus.basemvi.note.di.NoteActivityModule
 import com.zistus.core.utils.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -25,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
-@Module(includes = [HomeActivityModule::class])
+@Module(includes = [HomeActivityModule::class, NoteActivityModule::class])
 object AppModule {
 
 //    @Singleton
@@ -50,39 +44,6 @@ object AppModule {
         return Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
             .fallbackToDestructiveMigration()
             .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestDao(appDatabase: AppDatabase): TestDao {
-        return appDatabase.testDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestNetworkSource(apiSource: ApiService): TestNetworkSource {
-        return TestNetworkSourceImpl(apiSource)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestDatabaseSource(testDao: TestDao): TestDatabaseSource {
-        return TestDatabaseSourceImpl(testDao)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestRepository(
-        apiSource: TestNetworkSource,
-        databaseSource: TestDatabaseSource
-    ): TestRepository {
-        return TestRepositoryImpl(apiSource, databaseSource)
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestUseCase(testRepository: TestRepository): TestUseCase {
-        return TestUseCase(testRepo = testRepository)
     }
 
     fun provideClient(): OkHttpClient {
