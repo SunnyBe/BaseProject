@@ -3,7 +3,6 @@ package com.zistus.basemvi.note.data
 import com.zistus.basemvi.note.model.NoteEntity
 import com.zistus.basemvi.note.ui.NoteViewState
 import com.zistus.core.utils.DataState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

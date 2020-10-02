@@ -2,12 +2,15 @@ package com.zistus.basemvi.note.ui.note_list
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.zistus.basemvi.R
+import com.zistus.basemvi.databinding.FragmentHomeBinding
 import com.zistus.basemvi.note.ui.NoteActivityViewModel
 import com.zistus.core.di.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,28 +19,31 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NoteListFragment: Fragment(R.layout.fragment_home) {
+class NoteListFragment : Fragment(R.layout.fragment_home) {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     // Shared view-model attached to activity
     private val activityViewModel: NoteActivityViewModel by activityViewModels()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
-    lateinit var testText: String
-
     @ExperimentalCoroutinesApi
     private val viewModel: NoteListViewModel by viewModels { viewModelFactory }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView2?.text = testText
-        textView2?.setOnClickListener {
-            viewModel.loadAllNotes()
-//            viewModel.saveNote()
-        }
+        viewModel.loadAllNotes()
 
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
             activityViewModel.dataStateChanged(dataState)
