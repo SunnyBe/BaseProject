@@ -1,94 +1,77 @@
 package com.zistus.basemvi.note.ui
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.zistus.basemvi.note.model.NoteEntity
+import com.zistus.basemvi.note.data.NoteRepository
 import com.zistus.core.utils.DataState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class NoteActivityViewModel @Inject constructor(
-
+class NoteActivityViewModel
+@Inject
+constructor(
+    private val noteRepository: NoteRepository
 ) : ViewModel() {
+    private val _isLoadingChannel = ConflatedBroadcastChannel<Boolean>(false)
+    private val _alertLoadingChannel = ConflatedBroadcastChannel<String?>(null)
 
-    val intentChannel = ConflatedBroadcastChannel<NoteStateEvent>()
-    val stateChannel = ConflatedBroadcastChannel<NoteViewState>()
+    val isLoading: LiveData<Boolean> = _isLoadingChannel.asFlow().asLiveData()
 
-    val viewState =
-        stateChannel.asFlow()
-            .asLiveData()
+    fun dataStateChanged(dataState: DataState<*>) {
+        _isLoadingChannel.offer(dataState.loading)
+        _alertLoadingChannel.offer(dataState.message?.getContentIfNotHandled())
+    }
 
-    val dataState = intentChannel.asFlow()
-        .flatMapLatest { stateEvent ->
-            Log.d(this.javaClass.simpleName, "Triggered: dataState: LiveData()")
-            handleStateEvent(stateEvent)
-        }.asLiveData()
-
-
-    init {
-//        intentChannel.asFlow()
-//            .flatMapLatest {  stateEvent->
-//                handleStateEvent(stateEvent)
+//        @ExperimentalCoroutinesApi
+//    val viewState =
+//        stateChannel.asFlow()
+//            .asLiveData()
+//
+//    val dataState = intentChannel.asFlow()
+//        .flatMapLatest { stateEvent ->
+//            handleStateEvent(stateEvent)
+//        }.asLiveData()
+//
+//    private fun handleStateEvent(stateEvent: NoteStateEvent): Flow<DataState<NoteViewState>> {
+//        return when (stateEvent) {
+//            is NoteStateEvent.FetchAllNote -> {
+//                noteRepository.fetchAllNotes()
 //            }
-//            .launchIn(viewModelScope)
-    }
-
-    private fun handleStateEvent(stateEvent: NoteStateEvent): Flow<DataState<NoteViewState>> {
-        return when (stateEvent) {
-            is NoteStateEvent.FetchAllNote -> {
-                Log.d(this.javaClass.simpleName, "Triggered: handleStateEvent()")
-                flow {
-                    val list = mutableListOf(NoteEntity.Note("01", "title", "content"))
-                    emit(DataState.data("Success", NoteViewState(noteList = list)))
-                }
-            }
-
-            is NoteStateEvent.GetNote -> {
-                flow {
-                    val note = NoteEntity.Note("01", "title", "content")
-                    emit(DataState.data("Success" ,NoteViewState(note = note)))
-                }
-            }
-
-            is NoteStateEvent.UpdateNote-> {
-                flow {
-                    val note = NoteEntity.Note("01", "title", "content")
-                    val dataState = DataState.data("Success", NoteViewState(note = note))
-                    emit(dataState)
-                }
-            }
-
-            is NoteStateEvent.SaveNote-> {
-                flow {
-                    val note = NoteEntity.Note("05", "saved title", "saved content")
-                    val dataState = DataState.data("Success", NoteViewState(note = note))
-                    emit(dataState)
-                }
-            }
-
-            is NoteStateEvent.Idle -> {
-                flow { emit(DataState.data("No Data",NoteViewState())) }
-            }
-        }
-    }
-
-    fun loadAllNotes() {
-        Log.d(this.javaClass.simpleName, "Triggered: loadAllNotes()")
-        intentChannel.offer(NoteStateEvent.FetchAllNote())
-    }
-
-    fun saveNote(note: NoteEntity.Note? = NoteEntity.Note("02", "test title", "test content")) {
-        intentChannel.offer(NoteStateEvent.SaveNote(note))
-    }
-
-    fun setViewState(viewState: NoteViewState) {
-        stateChannel.offer(viewState)
-    }
+//
+//            is NoteStateEvent.GetNote -> {
+//                noteRepository.fetchNote(stateEvent.noteId)
+//            }
+//
+//            is NoteStateEvent.UpdateNote -> {
+//                val note = stateEvent.note
+//                noteRepository.updateNote(note)
+//            }
+//
+//            is NoteStateEvent.SaveNote -> {
+//                val note = stateEvent.note
+//                noteRepository.saveNote(note)
+//            }
+//
+//            is NoteStateEvent.Idle -> {
+//                flow { emit(DataState.data("No Data", NoteViewState())) }
+//            }
+//        }
+//    }
+//
+//    @ExperimentalCoroutinesApi
+//    fun loadAllNotes() {
+//        intentChannel.offer(NoteStateEvent.FetchAllNote())
+//    }
+//
+//    @ExperimentalCoroutinesApi
+//    fun saveNote(note: NoteEntity.Note? = NoteEntity.Note("02", "test title", "test content")) {
+//        intentChannel.offer(NoteStateEvent.SaveNote(note))
+//    }
+//
+//    @ExperimentalCoroutinesApi
+//    fun setViewState(viewState: NoteViewState) {
+//        stateChannel.offer(viewState)
+//    }
 }

@@ -11,7 +11,7 @@ buildscript {
         classpath Build.build_tools
         classpath Build.kotlin_gradle_plugin
         classpath Build.hilt
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath Build.navigation_safe_args
     }
 }
 

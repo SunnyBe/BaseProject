@@ -19,7 +19,8 @@
 <!--            </intent-filter>-->
         </activity>
 
-        <activity android:name=".note.ui.NoteActivity">
+        <activity android:name=".note.ui.NoteActivity"
+            android:theme="@style/AppTheme.NoteTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

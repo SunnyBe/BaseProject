@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/note_menu_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/note_menu_calendar"
+        android:title="Calendar"
+        android:icon="@drawable/ic_calendar_month"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/note_menu_new"
+        android:title="New"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/note_menu_file"
+        android:title="File"
+        android:icon="@drawable/ic_computer_folder"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/note_menu_user"
+        android:title="User"
+        android:icon="@drawable/ic_user"
+        app:showAsAction="ifRoom"
+        />
+</menu>

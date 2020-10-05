@@ -6,4 +6,5 @@ object Build {
     val crashlytics_gradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_gradle}"
     val ktlint = "com.pinterest:ktlint:${Versions.pintrest_ktlint}"
     val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
+    val navigation_safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav_components}"
 }
