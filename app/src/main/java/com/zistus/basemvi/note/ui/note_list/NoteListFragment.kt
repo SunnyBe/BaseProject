@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zistus.basemvi.R
 import com.zistus.basemvi.databinding.FragmentHomeBinding
 import com.zistus.basemvi.note.ui.NoteActivityViewModel
@@ -33,6 +33,8 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
     @ExperimentalCoroutinesApi
     private val viewModel: NoteListViewModel by viewModels { viewModelFactory }
 
+    private val noteListAdapter = NoteListAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +47,7 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView(view)
         viewModel.loadAllNotes()
 
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
@@ -64,8 +67,18 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
 
             viewState.noteList?.let {
                 Log.d(this.javaClass.simpleName, "Returned Note list: $it")
-                textView2?.text = it.toString()
+//                textView2?.text = it.toString()
+                noteListAdapter.submitList(it)
             }
         })
     }
+
+    private fun setupView(view: View) {
+        binding.noteList.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = noteListAdapter
+        }
+    }
+
+
 }

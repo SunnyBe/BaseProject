@@ -11,7 +11,15 @@ object NoteRepository {
     fun fetchAllNotes(): Flow<DataState<NoteViewState>> {
         return flow {
             emit(DataState.loading(true))
-            val list = mutableListOf(NoteEntity.Note("01", "title", "content"))
+            val item = NoteEntity.Note("01", "first title", "content")
+            val item1 = NoteEntity.Note("02", "test title", "this is just a test content for the show")
+            val item2 = NoteEntity.Note("03", "another title", "content for the show, dont mind this isa tes")
+            val item3 = NoteEntity.Note("04", "another title", "content for the show, dont mind this isa tes")
+            val list = mutableListOf(item).apply {
+                add(item1)
+                add(item2)
+                add(item3)
+            }
             emit(DataState.data("Success", NoteViewState(noteList = list)))
         }
     }

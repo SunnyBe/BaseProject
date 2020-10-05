@@ -50,6 +50,12 @@ dependencies {
     // Support
     api SupportDependencies.appcompat
     api SupportDependencies.constraintlayout
+    api SupportDependencies.material_design
+    api SupportDependencies.swipe_refresh_layout
+    api SupportDependencies.recyclerview
+//    api SupportDependencies.recylcerview_selectin
+
+    // UI
 
     // Reactive programming
     api Dependencies.kotlin_coroutines
