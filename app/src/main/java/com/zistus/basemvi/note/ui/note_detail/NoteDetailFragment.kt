@@ -1,4 +1,4 @@
-package com.zistus.basemvi.note.ui.note_list
+package com.zistus.basemvi.note.ui.note_detail
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.zistus.basemvi.R
 import com.zistus.basemvi.databinding.FragmentHomeBinding
+import com.zistus.basemvi.databinding.FragmentNoteDetailBinding
 import com.zistus.basemvi.note.model.NoteEntity
 import com.zistus.basemvi.note.ui.NoteActivityViewModel
+import com.zistus.basemvi.note.ui.note_list.NoteListAdapter
+import com.zistus.basemvi.note.ui.note_list.NoteListViewModel
 import com.zistus.core.di.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -22,8 +23,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NoteListFragment : Fragment(R.layout.fragment_home) {
-    private var _binding: FragmentHomeBinding? = null
+class NoteDetailFragment: Fragment(R.layout.fragment_note_detail) {
+
+    private var _binding: FragmentNoteDetailBinding? = null
     private val binding get() = _binding!!
 
     // Shared view-model attached to activity
@@ -35,30 +37,18 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
     @ExperimentalCoroutinesApi
     private val viewModel: NoteListViewModel by viewModels { viewModelFactory }
 
-    private val itemEvent = object: NoteListAdapter.ItemEvent{
-        override fun itemClick(note: NoteEntity.Note) {
-            val detailAction =
-                NoteListFragmentDirections.actionNoteListFragmentToNoteDetailFragment()
-            findNavController().navigate(detailAction)
-        }
-
-    }
-
-    private val noteListAdapter = NoteListAdapter(itemEvent)
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView(view)
         viewModel.loadAllNotes()
 
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
@@ -73,23 +63,12 @@ class NoteListFragment : Fragment(R.layout.fragment_home) {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.note?.let {
                 Log.d(this.javaClass.simpleName, "Returned Note: $it")
-                textView2?.text = it.toString()
-            }
-
-            viewState.noteList?.let {
-                Log.d(this.javaClass.simpleName, "Returned Note list: $it")
-//                textView2?.text = it.toString()
-                noteListAdapter.submitList(it)
+                populateNoteDetailOnView(it)
             }
         })
     }
 
-    private fun setupView(view: View) {
-        binding.noteList.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = noteListAdapter
-        }
+    private fun populateNoteDetailOnView(noteDetail: NoteEntity.Note) {
+
     }
-
-
 }

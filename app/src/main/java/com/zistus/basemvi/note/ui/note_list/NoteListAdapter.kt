@@ -12,20 +12,22 @@ import com.zistus.core.utils.DateUtils
 import kotlinx.android.synthetic.main.item_note.view.*
 import kotlinx.android.synthetic.main.layout_note_container.view.*
 
-val DiffUtil = object : DiffUtil.ItemCallback<NoteEntity.Note>() {
-    override fun areItemsTheSame(oldItem: NoteEntity.Note, newItem: NoteEntity.Note): Boolean {
-        return oldItem.id == newItem.id
-    }
+class NoteListAdapter(private val itemEvent: NoteListAdapter.ItemEvent): ListAdapter<NoteEntity.Note, NoteListAdapter.NoteViewHolder>(DiffUtil) {
 
-    override fun areContentsTheSame(
-        oldItem: NoteEntity.Note,
-        newItem: NoteEntity.Note
-    ): Boolean {
-        return oldItem == newItem
-    }
-}
+    companion object {
+        val DiffUtil = object : DiffUtil.ItemCallback<NoteEntity.Note>() {
+            override fun areItemsTheSame(oldItem: NoteEntity.Note, newItem: NoteEntity.Note): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-class NoteListAdapter: ListAdapter<NoteEntity.Note, NoteListAdapter.NoteViewHolder>(DiffUtil) {
+            override fun areContentsTheSame(
+                oldItem: NoteEntity.Note,
+                newItem: NoteEntity.Note
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     class NoteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(note: NoteEntity.Note) {
@@ -44,6 +46,13 @@ class NoteListAdapter: ListAdapter<NoteEntity.Note, NoteListAdapter.NoteViewHold
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            itemEvent.itemClick(getItem(position))
+        }
+    }
+
+    interface ItemEvent{
+        fun itemClick(note: NoteEntity.Note)
     }
 
 }
