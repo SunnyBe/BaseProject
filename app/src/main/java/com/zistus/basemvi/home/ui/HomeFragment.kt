@@ -44,11 +44,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
-        textView2.text = testText
-        textView2?.setOnClickListener {
-//            activity?.startActivity(Intent(activity, CameraActivity::class))
-
-        }
     }
 
     private fun subscribeObservers() {

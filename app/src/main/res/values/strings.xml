@@ -11,4 +11,6 @@
     </string>
     <string name="search_label">Search</string>
     <string name="lorem_ipsum">Lorem_Ipsum</string>
+    <string name="input_type_title">Select Input Method</string>
+    <string name="not_available_label">This feature is not available yet</string>
 </resources>

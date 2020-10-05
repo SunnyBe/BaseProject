@@ -34,6 +34,7 @@ class NoteActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this, Observer {
             showProgress(it)
         })
+
     }
 
     private fun showProgress(toShow: Boolean) {

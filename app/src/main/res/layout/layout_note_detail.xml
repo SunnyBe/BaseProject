@@ -68,7 +68,7 @@
         android:id="@+id/note_detail_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_home"
+        android:drawableStart="@drawable/ic_location"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:layout_marginStart="16dp"

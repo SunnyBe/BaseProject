@@ -13,9 +13,11 @@
         android:id="@+id/note_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:liftOnScroll="true"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/note_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -49,13 +51,14 @@
     <RelativeLayout
         android:id="@+id/long_text_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/note_app_bar"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/list_titile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -64,19 +67,24 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:text="@string/lorem_ipsum" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/note_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/note_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView2" />
+            android:layout_below="@id/list_titile">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/note_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                android:layout_marginBottom="?android:attr/actionBarSize"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </RelativeLayout>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hideOnScroll="true"
         android:layout_gravity="bottom"
         app:menu="@menu/note_bottom_app_bar"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
