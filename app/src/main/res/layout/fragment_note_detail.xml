@@ -15,12 +15,15 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/note_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:title="Note Detail"
-            app:menu="@menu/note_detail"
-            app:titleTextColor="@android:color/white">
+            style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
+            app:navigationIcon="@drawable/ic_arrow_left"
+            app:menu="@menu/note_detail_app_bar"
+            app:titleTextColor="@color/colorAppWhite">
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -30,11 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/note_app_bar"
-        android:background="@drawable/bg_note_content"
+        android:background="@drawable/bg_curve_dialog"
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <include
+            android:id="@+id/detail_content_layout"
             android:layout_centerInParent="true"
             layout="@layout/layout_note_detail"
             android:layout_width="match_parent"
